@@ -16,7 +16,7 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light" style="font-weight:bold; color:red">START</div>
+                <div class="sidebar-heading border-bottom bg-light" style="font-weight:bold" ><a href="/" style="color: red; text-decoration : none;">CODEING</a></div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice">공지사항</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">정보 게시판</a>
@@ -31,19 +31,19 @@
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="btn btn-primary" id="sidebarToggle">메뉴</button>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="#!">홈으로</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">링크</a></li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">정보</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#!">Action</a>
-                                        <a class="dropdown-item" href="#!">Another action</a>
+                                        <a class="dropdown-item" href="#!">회원 정보</a>
+                                        <a class="dropdown-item" href="#!">작성글</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a>
+                                        <a class="dropdown-item" href="#!">로그아웃</a>
                                     </div>
                                 </li>
                             </ul>
@@ -52,15 +52,29 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Simple Sidebar</h1>
-                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                    <p>
-                        Make sure to keep all page content within the
-                        <code>#page-content-wrapper</code>
-                        . The top navbar is optional, and just for demonstration. Just create an element with the
-                        <code>#sidebarToggle</code>
-                        ID which will toggle the menu when clicked.
+
+
+<!--                        Make sure to keep all page content within the-->
+<!--                        <code>#page-content-wrapper</code>-->
+<!--                        . The top navbar is optional, and just for demonstration. Just create an element with the-->
+<!--                        <code>#sidebarToggle</code>-->
+<!--                        ID which will toggle the menu when clicked.-->
+
                     </p>
+                    <nav>
+                        <ul>
+                            <li style="border: 2px solid red; width:100%; "><a href="/guest/a" style="text-decoration : none;">공지사항</a><br>
+                                <p>-공지사항공지사항공지사항</p></li>
+                            <li style="border: 2px solid red; text-decoration : none;"><a href="/guest/iv"  style="text-decoration : none;">자유게시판</a><br>
+                                <p>-자유게시판자유게시판자유게시판</p></li>
+                            <li style="border: 2px solid red; text-decoration : none;"><a href="/article/a"  style="text-decoration : none;">질문 게시판</a><br>
+                                <p>-질문 게시판질문 게시판질문 게시판</p></li>
+                            <li style="border: 2px solid red; text-decoration : none;"><a href="/article/iv"  style="text-decoration : none;">스터디 모임</a><br>
+                                <p>-스터디 모임스터디 모임스터디 모임</p></li>
+                            <li style="border: 2px solid red; text-decoration : none;"><a href="/article/iv"  style="text-decoration : none;">프로젝트 모임</a><br>
+                                <p>-프로젝트 모임프로젝트 모임프로젝트 모임</p></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
