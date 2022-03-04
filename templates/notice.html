@@ -6,11 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Codeing</title>
+        <title>Simple Sidebar - Start Bootstrap Template</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+        <style>
+            #sidebar-wrapper > div.list-group.list-group-flush > a:nth-child(1){
+                background:blue;
+            }
+        </style>
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -18,13 +23,13 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light" style="font-weight:bold" ><a href="/" style="color: red; text-decoration : none;">CODEING</a></div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice">공지사항</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice" style="font-weight:bold; color:white">공지사항</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info">정보 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna">질문 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free">자유게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study">스터디 모집</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project">프로젝트 모집</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/wiki" id="codewiki">코드잉 위키</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/codeingwiki">코드잉위키</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -67,17 +72,19 @@
 
                     </p>
                     <nav>
-                        <ul>
-                            <li><a href="/notice" style="text-decoration : none;">공지사항</a><br>
-                                <p>-공지사항공지사항공지사항</p></li>
-                            <li><a href="/free"  style="text-decoration : none;">자유게시판</a><br>
-                                <p>-자유게시판자유게시판자유게시판</p></li>
-                            <li><a href="/qna"  style="text-decoration : none;">질문 게시판</a><br>
-                                <p>-질문 게시판질문 게시판질문 게시판</p></li>
-                            <li><a href="/study"  style="text-decoration : none;">스터디 모임</a><br>
-                                <p>-스터디 모임스터디 모임스터디 모임</p></li>
-                            <li><a href="/project"  style="text-decoration : none;">프로젝트 모임</a><br>
-                                <p>-프로젝트 모임프로젝트 모임프로젝트 모임</p></li>
+                        <ul style="border: 2px solid red; border-radius: 20px; width:100%;">
+                            <li style="list-style:none; "><h4 style="font-weight:bold;">제목</h4></li>
+                            <li>공지사항1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                            <li>공지사항2</li>
+                            <li>공지사항3</li>
+                            <li>공지사항4</li>
+                            <li>공지사항5</li>
+                            <li>공지사항6</li>
+                            <li>공지사항2</li>
+                            <li>공지사항3</li>
+                            <li>공지사항4</li>
+                            <li>공지사항5</li>
+                            <li>공지사항6</li>
                         </ul>
                     </nav>
                 </div>
