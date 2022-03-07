@@ -20,13 +20,13 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light" style="font-weight:bold" ><a href="/" style="color: red; text-decoration : none;">CODEING</a></div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice" >공지사항</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info">정보 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna" style="background:blue; font-weight:bold; color:white">질문 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free">자유게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study">스터디 모집</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project">프로젝트 모집</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/codeingwiki">코드잉위키</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice/notice"style="background:blue; font-weight:bold; color:white">공지사항</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info/info">정보 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna/qna">질문 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free/free">자유게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study/study">스터디 모집</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project/project">프로젝트 모집</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/wiki/wiki" id="codewiki">코드잉위키</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -70,19 +70,19 @@
                     </p>
                     <nav>
                         <div class="container">
-                            <table class="table">
+                        <table class="table">
                                 <thead class="thead-light">
                                 <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
                                 </thead>
                                 <tbody>
                                 {% for o in objs %}
-                                {% if o.board == '질문' %}
+                                {% if o.board == '공지' %}
                                 <tr class="text-center">
                                     <td scope="row">
                                         <span>{{ o.board_id }}</span>
                                     </td>
                                     <td>
-                                        <a href="/notice" >{{o.board_title}}</a>
+                                        <a href="/notice/notice" >{{o.board_title}}</a>
                                     </td>
                                     <td>
                                         {{o.user_id}}
@@ -96,7 +96,6 @@
                                 </tbody>
                             </table>
                             </div>
-
                     </nav>
                 </div>
             </div>

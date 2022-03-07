@@ -6,11 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Codeing</title>
+        <title>Simple Sidebar - Start Bootstrap Template</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+        <style>
+        </style>
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -18,13 +20,13 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light" style="font-weight:bold" ><a href="/" style="color: red; text-decoration : none;">CODEING</a></div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice">공지사항</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info">정보 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna">질문 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free">자유게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study">스터디 모집</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project">프로젝트 모집</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/codeingwiki" id="codewiki" style="background:blue; font-weight:bold; color:white">코드잉위키</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice/notice">공지사항</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info/info"style="background:blue; font-weight:bold; color:white">정보 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna/qna">질문 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free/free">자유게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study/study">스터디 모집</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project/project">프로젝트 모집</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/wiki/wiki" id="codewiki">코드잉위키</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -67,13 +69,33 @@
 
                     </p>
                     <nav>
-                        <div style="padding:200px 0px;">
-                            <h1 style="text-align:center; color:blue; font-weight:bold">CODEINGWIKI</h1>
-                            <form style="text-align:center;">
-                            <input id="input" type="search" autocomplete="off" placeholder="검색할 항목을 입력해주세요" style="width:40%;height:40px; text-align:center;">
-                            <button type="submit" style="height:40px; text-align:center;">검색</button>
-                            </form>
-                        </div>
+                        <div class="container">
+                        <table class="table">
+                                <thead class="thead-light">
+                                <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
+                                </thead>
+                                <tbody>
+                                {% for o in objs %}
+                                {% if o.board == '정보' %}
+                                <tr class="text-center">
+                                    <td scope="row">
+                                        <span>{{ o.board_id }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="/info/info" >{{o.board_title}}</a>
+                                    </td>
+                                    <td>
+                                        {{o.user_id}}
+                                    </td>
+                                    <td>
+                                        {{o.board_date}}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            </div>
                     </nav>
                 </div>
             </div>
