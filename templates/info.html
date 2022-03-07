@@ -20,8 +20,8 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light" style="font-weight:bold" ><a href="/" style="color: red; text-decoration : none;">CODEING</a></div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice" style="background:blue; font-weight:bold; color:white">공지사항</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info">정보 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice">공지사항</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info" style="background:blue; font-weight:bold; color:white">정보 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna">질문 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free">자유게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study">스터디 모집</a>
@@ -69,70 +69,30 @@
 
                     </p>
                     <nav>
-                        <div style="container">
+                        <div class="container">
                         <table class="table">
-                                <thead>
-                                <tr class="thead"> <th>no</th><th>제목</th><th>작성자</th><th>작성일</th><th>스크랩</th></tr>
+                                <thead class="thead-light">
+                                <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="/info" style="text-decoration : none;">01</a>
+                                {% for o in objs %}
+                                {% if o.board == '정보' %}
+                                <tr class="text-center">
+                                    <td scope="row">
+                                        <span>{{ o.board_id }}</span>
                                     </td>
                                     <td>
-                                        <a href="/info" style="text-decoration : none;">how to install python</a>
+                                        <a href="/notice" >{{o.board_title}}</a>
                                     </td>
                                     <td>
-                                        <a href="/memberinfo" style="text-decoration : none;">id01</a>
-                                    </td>
-
-                                    <td>
-                                        2022-02-12
+                                        {{o.user_id}}
                                     </td>
                                     <td>
-                                        2
+                                        {{o.board_date}}
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <td>
-                                        <a href="/info" style="text-decoration : none;">02</a>
-                                    </td>
-                                    <td>
-                                        <a href="/info" style="text-decoration : none;">how to start python</a>
-                                    </td>
-                                    <td>
-                                        <a href="/memberinfo" style="text-decoration : none;">id02</a>
-                                    </td>
-
-                                    <td>
-                                        2022-02-28
-                                    </td>
-                                    <td>
-                                        10
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <a href="/info" style="text-decoration : none;">03</a>
-                                    </td>
-                                    <td>
-                                        <a href="/info" style="text-decoration : none;">what is github?</a>
-                                    </td>
-                                    <td>
-                                        <a href="/memberinfo" style="text-decoration : none;">id03</a>
-                                    </td>
-
-                                    <td>
-                                        2022-03-02
-                                    </td>
-                                    <td>
-                                        3
-                                    </td>
-                                </tr>
-
-
+                                {% endif %}
+                                {% endfor %}
                                 </tbody>
                             </table>
                             </div>

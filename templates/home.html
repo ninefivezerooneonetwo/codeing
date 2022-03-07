@@ -24,7 +24,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free">자유게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study">스터디 모집</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project">프로젝트 모집</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/codeingwiki" id="codewiki">코드잉 위키</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/codeingwiki" id="codewiki">코드잉위키</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -68,8 +68,8 @@
                     </p>
                     <nav>
                         <div class="container">
-                            <table class="table">
-                                <thead>
+                            <table class="table" >
+                                <thead style="border-bottom: solid black 1px;">
                                 <tr class="thead"> <th>게시판</th><th>내용</th></tr>
                                 </thead>
                                 <tbody>
@@ -77,57 +77,100 @@
                                     <td>
                                         <a href="/notice" style="text-decoration : none;">공지사항</a>
                                     </td>
+                                    <td><ul>
+                                    {% for o in objs %}
+                                    {% if o.board == '공지' %}
+
+
+                                        <li><a href="/notice">{{o.board_title}}</a></li>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                    </ul></td>
+                                </tr>
+                                <tr>
                                     <td>
-                                        -공지사항공지사항공지사항
+                                        <a href="/info"  style="text-decoration : none;">정보게시판</a>
                                     </td>
+                                    </td>
+                                    <td><ul>
+                                    {% for o in objs %}
+                                    {% if o.board == '정보' %}
+
+
+                                        <li><a href="/info">{{o.board_title}}</a></li>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                    </ul></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <a href="/free"  style="text-decoration : none;">자유게시판</a>
                                     </td>
-                                    <td>
-                                        -자유게시판자유게시판자유게시판
                                     </td>
+                                    <td><ul>
+                                    {% for o in objs %}
+                                    {% if o.board == '자유' %}
+
+
+                                        <li><a href="/free">{{o.board_title}}</a></li>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                    </ul></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <a href="/qna"  style="text-decoration : none;">질문 게시판</a>
                                     </td>
-                                    <td>
-                                        -질문 게시판질문 게시판질문 게시판
                                     </td>
+                                    <td><ul>
+                                    {% for o in objs %}
+                                    {% if o.board == '질문' %}
+
+
+                                        <li><a href="/qna">{{o.board_title}}</a></li>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                    </ul></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <a href="/study"  style="text-decoration : none;">스터디 모임</a>
                                     </td>
-                                    <td>
-                                        -스터디 모임스터디 모임스터디 모임
                                     </td>
+                                    <td><ul>
+                                    {% for o in objs %}
+                                    {% if o.board == '스터디' %}
+
+
+                                        <li><a href="/study">{{o.board_title}}</a></li>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                    </ul></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <a href="/project"  style="text-decoration : none;">프로젝트 모임</a>
                                     </td>
-                                    <td>
-                                        -프로젝트 모임프로젝트 모임프로젝트 모임
                                     </td>
+                                    <td><ul>
+                                    {% for o in objs %}
+                                    {% if o.board == '프로젝트' %}
+
+
+                                        <li><a href="/project">{{o.board_title}}</a></li>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                    </ul></td>
                                 </tr>
 
                                 </tbody>
                             </table>
-<!--                        <ul>-->
-<!--                            <li><a href="/notice" style="text-decoration : none;">공지사항</a><br>-->
-<!--                                <p>-공지사항공지사항공지사항</p></li>-->
-<!--                            <li><a href="/free"  style="text-decoration : none;">자유게시판</a><br>-->
-<!--                                <p>-자유게시판자유게시판자유게시판</p></li>-->
-<!--                            <li><a href="/qna"  style="text-decoration : none;">질문 게시판</a><br>-->
-<!--                                <p>-질문 게시판질문 게시판질문 게시판</p></li>-->
-<!--                            <li><a href="/study"  style="text-decoration : none;">스터디 모임</a><br>-->
-<!--                                <p>-스터디 모임스터디 모임스터디 모임</p></li>-->
-<!--                            <li><a href="/project"  style="text-decoration : none;">프로젝트 모임</a><br>-->
-<!--                                <p>-프로젝트 모임프로젝트 모임프로젝트 모임</p></li>-->
-<!--                        </ul>-->
                         </div>
                     </nav>
                 </div>

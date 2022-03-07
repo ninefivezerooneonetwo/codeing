@@ -69,85 +69,34 @@
 
                     </p>
                     <nav>
-                        <div style="container">
+                        <div class="container">
                         <table class="table">
-                                <thead>
-                                <tr class="thead"> <th>제목</th><th>내용</th><th>날짜</th><th>모임 형태</th></tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="/project/g" style="text-decoration : none;">프로젝트 모집1</a>
-                                    </td>
-                                    <td>
-                                        -App Project
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                    <td>
-                                        온/오프라인
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/project/g" style="text-decoration : none;">프로젝트 모집2</a>
-                                    </td>
-                                    <td>
-                                        -Web Project
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                      <td>
-                                        온라인
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/project/g" style="text-decoration : none;">프로젝트 모집3</a>
-                                    </td>
-                                    <td>
-                                        -Iot Project
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                      <td>
-                                        온라인
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/project/g" style="text-decoration : none;">프로젝트 4</a>
-                                    </td>
-                                    <td>
-                                        -1234
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                      <td>
-                                        오프라인
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/project/g" style="text-decoration : none;">프로젝트5</a>
-                                    </td>
-                                    <td>
-                                        -5678
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                      <td>
-                                        온라인
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
+                        <thead class="thead-light">
+                        <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
+                        </thead>
+                        <tbody>
+                        {% for o in objs %}
+                        {% if o.board == '프로젝트' %}
+                        <tr class="text-center">
+                            <td scope="row">
+                                <span>{{ o.board_id }}</span>
+                            </td>
+                            <td>
+                                <a href="/post">
+                                    <span>{{ o.board_title }}</span>
+                                </a>
+                            </td>
+                            <td>
+                                <span>{{ o.user_id }}</span>
+                            </td>
+                            <td>
+                                <span>{{ o.board_date}}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
                             </div>
                     </nav>
                 </div>

@@ -69,85 +69,33 @@
 
                     </p>
                     <nav>
-                        <div style="container">
+                        <div class="container">
                         <table class="table">
-                                <thead>
-                                <tr class="thead"> <th>제목</th><th>내용</th><th>날짜</th></tr>
+                                <thead class="thead-light">
+                                <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="/notice" style="text-decoration : none;">공지사항</a>
+                                {% for o in objs %}
+                                {% if o.board == '공지' %}
+                                <tr class="text-center">
+                                    <td scope="row">
+                                        <span>{{ o.board_id }}</span>
                                     </td>
                                     <td>
-                                        -공지사항공지사항공지사항
+                                        <a href="/notice" >{{o.board_title}}</a>
                                     </td>
                                     <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/notice" style="text-decoration : none;">공지사항</a>
+                                        {{o.user_id}}
                                     </td>
                                     <td>
-                                        -공지사항공지사항공지사항
-                                    </td>
-                                    <td>
-                                        2022-02-12
+                                        {{o.board_date}}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/notice" style="text-decoration : none;">공지사항</a>
-                                    </td>
-                                    <td>
-                                        -공지사항공지사항공지사항
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/notice" style="text-decoration : none;">공지사항</a>
-                                    </td>
-                                    <td>
-                                        -공지사항공지사항공지사항
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/notice" style="text-decoration : none;">공지사항</a>
-                                    </td>
-                                    <td>
-                                        -공지사항공지사항공지사항
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-
+                                {% endif %}
+                                {% endfor %}
                                 </tbody>
                             </table>
                             </div>
-<!--                        <ul>-->
-<!--                            <li style="list-style:none; "><h4 style="font-weight:bold;">제목</h4></li>-->
-<!--                            <li>공지사항1</li>-->
-<!--                            <li>공지사항2</li>-->
-<!--                            <li>공지사항3</li>-->
-<!--                            <li>공지사항4</li>-->
-<!--                            <li>공지사항5</li>-->
-<!--                            <li>공지사항6</li>-->
-<!--                            <li>공지사항2</li>-->
-<!--                            <li>공지사항3</li>-->
-<!--                            <li>공지사항4</li>-->
-<!--                            <li>공지사항5</li>-->
-<!--                            <li>공지사항6</li>-->
-<!--                        </ul>-->
                     </nav>
                 </div>
             </div>

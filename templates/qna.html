@@ -69,85 +69,34 @@
 
                     </p>
                     <nav>
-                        <div style="container">
-                        <table class="table">
-                                <thead>
-                                <tr class="thead"> <th>제목</th><th>내용</th><th>날짜</th></tr>
+                        <div class="container">
+                            <table class="table">
+                                <thead class="thead-light">
+                                <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="/qna" style="text-decoration : none;">질문게시판</a>
+                                {% for o in objs %}
+                                {% if o.board == '질문' %}
+                                <tr class="text-center">
+                                    <td scope="row">
+                                        <span>{{ o.board_id }}</span>
                                     </td>
                                     <td>
-                                        -질문질문
+                                        <a href="/notice" >{{o.board_title}}</a>
                                     </td>
                                     <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/qna" style="text-decoration : none;">질문게시판</a>
+                                        {{o.user_id}}
                                     </td>
                                     <td>
-                                        -질문하세요
-                                    </td>
-                                    <td>
-                                        2022-02-12
+                                        {{o.board_date}}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/qna" style="text-decoration : none;">Python 질문</a>
-                                    </td>
-                                    <td>
-                                        -for문에 관하여
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/qna" style="text-decoration : none;">java 질문</a>
-                                    </td>
-                                    <td>
-                                        -java class 질문
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/qna" style="text-decoration : none;">kotlin 질문</a>
-                                    </td>
-                                    <td>
-                                        -안드로이드 앱 개발 시 자바와 코틀린의 장단점
-                                    </td>
-                                    <td>
-                                        2022-02-12
-                                    </td>
-                                </tr>
-
+                                {% endif %}
+                                {% endfor %}
                                 </tbody>
                             </table>
                             </div>
-<!--                        <ul>-->
-<!--                            <li style="list-style:none; "><h4 style="font-weight:bold;">제목</h4></li>-->
-<!--                            <li>공지사항1</li>-->
-<!--                            <li>공지사항2</li>-->
-<!--                            <li>공지사항3</li>-->
-<!--                            <li>공지사항4</li>-->
-<!--                            <li>공지사항5</li>-->
-<!--                            <li>공지사항6</li>-->
-<!--                            <li>공지사항2</li>-->
-<!--                            <li>공지사항3</li>-->
-<!--                            <li>공지사항4</li>-->
-<!--                            <li>공지사항5</li>-->
-<!--                            <li>공지사항6</li>-->
-<!--                        </ul>-->
+
                     </nav>
                 </div>
             </div>
