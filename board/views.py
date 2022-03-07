@@ -17,3 +17,7 @@ class MyView(View):
     @request_mapping("/codeingwiki", method="get")
     def wiki(self, request):
         return render(request, 'wiki.html');
+
+    @request_mapping("/qna", method="get")
+    def qna(self, request):
+        return render(request, 'qna.html')
