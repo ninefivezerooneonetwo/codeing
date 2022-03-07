@@ -16,6 +16,7 @@ class MyView(View):
     def notice(self, request):
         return render(request, 'notice.html');
 
+
     @request_mapping("/codeingwiki", method="get")
     def wiki(self, request):
         return render(request, 'wiki.html');
