@@ -24,7 +24,6 @@ class MyView(View):
         };
         return render(request, 'notice.html', context);
 
-
     @request_mapping("/info", method="get") #정보게시판
     def info(self, request):
         objs = Board.objects.all();
@@ -32,8 +31,6 @@ class MyView(View):
             'objs': objs
         };
         return render(request, 'info.html', context);
-
-
 
     @request_mapping("/free", method="get") #자유게시판
     def free(self, request):
@@ -59,15 +56,13 @@ class MyView(View):
         };
         return render(request, 'project.html', context);
 
-    @request_mapping("/study", method="get") #스터디디
-    def stdy(self, request):
+    @request_mapping("/study", method="get") #스터디
+    def study(self, request):
         objs = Board.objects.all();
         context = {
             'objs': objs
         };
         return render(request, 'study.html',context);
-
-
 
     @request_mapping("/post", method="get")
     def post(self, request):
