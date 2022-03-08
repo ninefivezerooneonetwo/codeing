@@ -14,7 +14,7 @@ class Board(models.Model):
     board_time = models.DateTimeField(blank=True, null=True)
     board_on_off = models.CharField(max_length=20, blank=True, null=True)
     board_phone = models.CharField(max_length=20, blank=True, null=True)
-    board_date = models.DateTimeField(blank=True, null=True)
+    board_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         managed = False
@@ -36,7 +36,7 @@ class Comment(models.Model):
     board = models.ForeignKey(Board, models.DO_NOTHING)
     user = models.ForeignKey('User', models.DO_NOTHING)
     comment_content = models.TextField(blank=True, null=True)
-    comment_date = models.DateTimeField(blank=True, null=True)
+    comment_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         managed = False
@@ -47,7 +47,7 @@ class Revision(models.Model):
     revi_id = models.AutoField(primary_key=True)
     revi_title = models.CharField(max_length=50, blank=True, null=True)
     revi_content = models.TextField(blank=True, null=True)
-    revi_date = models.DateTimeField(blank=True, null=True)
+    revi_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey('User', models.DO_NOTHING)
 
     class Meta:

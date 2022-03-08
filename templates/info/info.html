@@ -88,13 +88,19 @@
                                         {{o.user_id}}
                                     </td>
                                     <td>
-                                        {{o.board_date}}
+                                        {{o.board_date | date:'Y-m-d H:i'}}
                                     </td>
                                 </tr>
                                 {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            {% if request.session.sessionid == None %}
+                            {% else %}
+                            <a href="post" class="btn btn-primary">
+                                글쓰기
+                            </a>
+                             {% endif %}
                             </div>
                     </nav>
                 </div>

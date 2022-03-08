@@ -72,7 +72,7 @@
                         <div class="container">
                             <table class="table">
                                 <thead class="thead-light">
-                                <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
+                                <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>모집기한</th><th>날짜</th></tr>
                                 </thead>
                                 <tbody>
                                 {% for o in objs %}
@@ -88,8 +88,12 @@
                                         {{o.user_id}}
                                     </td>
                                     <td>
-                                        {{o.board_date}}
+                                        {{o.board_recruitdate | date:'Y-m-d H:i'}}
                                     </td>
+                                    <td>
+                                        {{o.board_date | date:'Y-m-d H:i'}}
+                                    </td>
+
                                 </tr>
                                 {% endif %}
                                 {% endfor %}
@@ -97,7 +101,7 @@
                             </table>
                             {% if request.session.sessionid == None %}
                             {% else %}
-                            <a href="/create" class="btn btn-primary">
+                            <a href="post" class="btn btn-primary">
                                 글쓰기
                             </a>
                              {% endif %}

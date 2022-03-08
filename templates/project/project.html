@@ -90,13 +90,19 @@
                                 <span>{{ o.user_id }}</span>
                             </td>
                             <td>
-                                <span>{{ o.board_date}}</span>
+                                <span>{{ o.board_date | date:'Y-m-d H:i'}}</span>
                             </td>
                         </tr>
                         {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
+                            {% if request.session.sessionid == None %}
+                            {% else %}
+                            <a href="post" class="btn btn-primary">
+                                글쓰기
+                            </a>
+                             {% endif %}
                             </div>
                     </nav>
                 </div>
