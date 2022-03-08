@@ -5,7 +5,7 @@ from board.models import Board, Clipping, Comment, Revision, User, Wiki
 
 
 class BoardAdmin(admin.ModelAdmin):
-    list_display = ('board_id','user','wiki','board','board_title','board_content','board_num','board_place'
+    list_display = ('board_id','user_id','wiki_id','board','board_title','board_content','board_num','board_place'
                     ,'board_recruitdate','board_time','board_on_off','board_phone','board_date',);
 admin.site.register(Board,BoardAdmin);
 

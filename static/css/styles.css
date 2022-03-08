@@ -11325,6 +11325,5 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 
 #page-content-wrapper > div > nav > ul > li {
-    border: 2px solid red;
     text-decoration : none;
 }
