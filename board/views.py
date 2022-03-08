@@ -230,3 +230,57 @@ class MyView(View):
     def wiki(self, request):
         return render(request, 'wiki/wiki.html');
 
+    @request_mapping("/register", method="get")  # 회원가입
+    def register(self, request):
+        return render(request, 'register.html');
+
+    @request_mapping("/registerimpl", method="post")
+    def registerimpl(self, request):
+        user_id = request.POST['user_id'];
+        user_pwd = request.POST['user_pwd'];
+        user_name = request.POST['user_name'];
+        user_email = request.POST['user_email'];
+        user_phone = request.POST['user_phone'];
+        favcom1 = request.POST['favcom1'];
+        favcom2 = request.POST['favcom2'];
+        favlang1 = request.POST['favlang1'];
+        favlang2 = request.POST['favlang2'];
+
+        context = {}
+        try:
+            User.objects.get(user_id=user_id)
+            context['center'] = 'registerfail.html'
+        except:
+            User(user_id=user_id, user_pwd=user_pwd, user_name=user_name, user_email=user_email,
+                 user_phone=user_phone, favcom1=favcom1, favcom2=favcom2, favlang1=favlang1, favlang2=favlang2).save()
+            context['center'] = 'registerok.html'
+
+        return render(request, 'home.html', context)
+
+    @request_mapping("/login", method="get")  # 공지사항
+    def login(self, request):
+        return render(request, 'login.html');
+
+    @request_mapping("/loginimpl", method="post")  # 공지사항
+    def loginimpl(self, request):
+
+        user_id = request.POST['id']
+        user_pwd = request.POST['pwd']
+
+        try:
+            user = User.objects.get(user_id=user_id)
+            if user.user_pwd == user_pwd:
+                request.session['sessionid'] = user.user_id;
+                request.session['sessionname'] = user.user_name;
+                return render(request, 'loginok.html');
+            else:
+                raise Exception
+        except:
+            return render(request, 'loginfail.html');
+
+    @request_mapping("/logout", method="get")
+    def logout(self, request):
+        if request.session['sessionid'] != None:
+            del request.session['sessionid']
+
+        return render(request, 'home.html')
