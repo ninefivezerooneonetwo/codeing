@@ -282,7 +282,7 @@ class MyView(View):
             if user.user_pwd == user_pwd:
                 request.session['sessionid'] = user.user_id;
                 request.session['sessionname'] = user.user_name;
-                return render(request, 'loginok.html');
+                return render(request, 'home.html');
             else:
                 raise Exception
         except:
