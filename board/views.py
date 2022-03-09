@@ -38,9 +38,8 @@ class MyView(View):
     def notice_post(self, request):
         title = request.POST['title'];
         text = request.POST['content'];
-        wiki = request.POST['wiki'];
         try:
-                data = Board(board_title=title, board='공지', user_id=request.session['sessionid'], wiki_id=wiki, board_content=text,
+                data = Board(board_title=title, board='공지', user_id=request.session['sessionid'], wiki_id='1', board_content=text,
                              board_date=timezone.now());
                 data.save()
                 return render(request, 'notice/postok.html');
