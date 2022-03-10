@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views import View
 from django_request_mapping import request_mapping
-from board.models import Board, User, Wiki
+from board.models import Board, User, Wiki, Revision
 from django.utils import timezone
 
 @request_mapping("")
@@ -38,9 +38,8 @@ class MyView(View):
     def notice_post(self, request):
         title = request.POST['title'];
         text = request.POST['content'];
-        wiki = request.POST['wiki'];
         try:
-                data = Board(board_title=title, board='공지', user_id=request.session['sessionid'], wiki_id=wiki, board_content=text,
+                data = Board(board_title=title, board='공지', user_id=request.session['sessionid'], wiki_id='1', board_content=text,
                              board_date=timezone.now());
                 data.save()
                 return render(request, 'notice/postok.html');
@@ -276,10 +275,44 @@ class MyView(View):
     def post(self, request):
         return render(request, 'post.html');
 
+    # ================================================================
     @request_mapping("/wiki/wiki", method="get")
     def wiki(self, request):
         return render(request, 'wiki/wiki.html');
 
+    @request_mapping("/wiki/post", method="get")  # 공지사항
+    def wikipost(self, request):
+        return render(request, 'wiki/post.html');
+
+    @request_mapping("/wiki/wiki/p", method="post")  # 질문
+    def wiki_insert(self, request):
+        title = request.POST['wiki_title'];
+        revititle = request.POST['revi_title'];
+        text = request.POST['content'];
+        revitext = request.POST['revi_content'];
+        kind = request.POST['kind']
+        userid = User.objects.get(user_id = request.session['sessionid'])
+        try:
+            wikiall = Wiki.objects.all();
+            for i in wikiall:
+                if i.wiki_title == title: #제목이 이미 있으면
+                    print(i.wiki_title)
+                    raise Exception; #에러발생
+
+        except:
+            return render(request, 'wiki/postfail.html');
+
+        try:
+            data2 = Revision(revi_title = title, revi_content = revitext, user_id = userid.user_id)
+            data2.save()
+            revi1 = Revision.objects.get(revi_title = title)
+            data = Wiki(wiki_title=title, wiki_kind=kind, wiki_content=text,revi_id = revi1.revi_id);
+            data.save()
+            return render(request, 'wiki/postok.html');
+        except:  # id 값이 없으므로 에러가 남
+            return render(request, 'postfail.html');
+
+    # ================================================================
     @request_mapping("/register", method="get")  # 회원가입
     def register(self, request):
         return render(request, 'register.html');

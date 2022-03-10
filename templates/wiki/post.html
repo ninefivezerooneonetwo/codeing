@@ -7,9 +7,9 @@
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/notice/notice">공지사항</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/info/info">정보 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna/qna"style="background:blue; font-weight:bold; color:white">질문 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna/qna">질문 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/free/free">자유게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study/study">스터디 모집</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/study/study"style="background:blue; font-weight:bold; color:white">스터디 모집</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/project/project">프로젝트 모집</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/wiki/wiki" id="codewiki">코드잉위키</a>
                 </div>
@@ -42,23 +42,42 @@
                         </div>
                     </div>
                 </nav>
-                <!-- Page content-->
-                <div class="container-fluid">
-
-
-<!--                        Make sure to keep all page content within the-->
-<!--                        <code>#page-content-wrapper</code>-->
-<!--                        . The top navbar is optional, and just for demonstration. Just create an element with the-->
-<!--                        <code>#sidebarToggle</code>-->
-<!--                        ID which will toggle the menu when clicked.-->
-
-                    </p>
-                    <nav>
-                        <div class="container">
-                            <div style="text-align:center"><h1>글이 정상적으로 올라갔습니다.</h1>
-                            <a href="/qna/qna">게시판으로</a></div>
+                <div class="container">
+                    <form action="/wiki/wiki/p" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="wiki_title" class="form-control" id="inputTitle" autofocus>
+                            </div>
                         </div>
-                    </nav>
+                        <div class="form-group row">
+                            <label for="inputTitle" class="col-sm-2 col-form-label"><strong>카테고리</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="kind" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
+                            <div class="col-sm-10">
+                                <textarea type="text" name="content" class="form-control" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputContent" class="col-sm-2 col-form-label"><strong>수정내용</strong></label>
+                            <div class="col-sm-10">
+                                <textarea type="text" name="revi_content" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto mr-auto"></div>
+                            <div class="col-auto">
+                                <input class="btn btn-primary" type="submit" role="button" value="글쓰기">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

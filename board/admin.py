@@ -10,15 +10,15 @@ class BoardAdmin(admin.ModelAdmin):
 admin.site.register(Board,BoardAdmin);
 
 class ClippingAdmin(admin.ModelAdmin):
-    list_display =('clip_id','user','board');
+    list_display =('clip_id','user_id','board_id');
 admin.site.register(Clipping,ClippingAdmin);
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display =('comment_id','board','user','comment_content','comment_date');
+    list_display =('comment_id','board_id','user_id','comment_content','comment_date');
 admin.site.register(Comment,CommentAdmin);
 
 class RevisionAdmin(admin.ModelAdmin):
-    list_display =('revi_id','revi_title','revi_content','revi_date','user');
+    list_display =('revi_id','revi_title','revi_content','revi_date','user_id');
 admin.site.register(Revision,RevisionAdmin);
 
 class UserAdmin(admin.ModelAdmin):
@@ -26,5 +26,5 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(User,UserAdmin);
 
 class WikiAdmin(admin.ModelAdmin):
-    list_display =('wiki_id','wiki_title','wiki_kind','wiki_content','revi');
+    list_display =('wiki_id','wiki_title','wiki_kind','wiki_content','revi_id');
 admin.site.register(Wiki,WikiAdmin);
