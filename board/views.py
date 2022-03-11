@@ -323,7 +323,6 @@ class MyView(View):
     @request_mapping("/wiki/wiki/p", method="post")  # 질문
     def wiki_insert(self, request):
         title = request.POST['wiki_title'];
-        revititle = request.POST['revi_title'];
         text = request.POST['content'];
         revitext = request.POST['revi_content'];
         kind = request.POST['kind']
