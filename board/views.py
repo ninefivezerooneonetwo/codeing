@@ -82,16 +82,17 @@ class MyView(View):
         else :
             return redirect('/login')
 
-    @request_mapping("/clip/detailstupro/", method="get")
-    def scrap_detailstupro(self, request):
-        from django.shortcuts import redirect
-        if 'sessionid' in request.session:
-            board = Board.objects.get(board_id=request.GET['board_id'])  # board_id로 Board정보 가져오기
-            context = {'board': board}
-
-            return render(request, 'clip/detail_study_project.html', context)
-        else:
-            return redirect('/login')
+    ### 220314 코드 삭제
+    # @request_mapping("/clip/detailstupro/", method="get")
+    # def scrap_detailstupro(self, request):
+    #     from django.shortcuts import redirect
+    #     if 'sessionid' in request.session:
+    #         board = Board.objects.get(board_id=request.GET['board_id'])  # board_id로 Board정보 가져오기
+    #         context = {'board': board}
+    #
+    #         return render(request, 'clip/detail.html', context)
+    #     else:
+    #         return redirect('/login')
 
     @request_mapping("/wiki/detail/", method="get")
     def wiki_detail(self, request):
