@@ -8,6 +8,35 @@ from django.utils import timezone
 
 @request_mapping("")
 class MyView(View):
+    # 20220314 코드 추가 ####################################################
+    @request_mapping("/clip/delete/", method="post")
+    def scrap_delete(self, request):
+        """
+        스크랩 삭제 함수
+        """
+        from .models import Clipping
+        from django.http import JsonResponse
+        import json
+
+        if 'sessionid' in request.session: # 로그인 체크
+
+            try :
+                data = json.loads(request.body)
+
+                board = Board.objects.get(board_id=data)
+                user = User.objects.get(user_id=request.session['sessionid'])
+                clip = Clipping.objects.get(user_id = user,
+                                            board_id=board)
+                clip.delete()
+                context = {
+                    'result': data,
+                }
+            except :
+                context = {
+                    'result': 'fail',
+                }
+            return JsonResponse(context)
+    #####################################################
 
     @request_mapping("/notice/scrap/", method="get")
     def notice_scrap(self, request):
@@ -81,18 +110,6 @@ class MyView(View):
             return render(request, 'clip/detail.html', context)
         else :
             return redirect('/login')
-
-    ### 220314 코드 삭제
-    # @request_mapping("/clip/detailstupro/", method="get")
-    # def scrap_detailstupro(self, request):
-    #     from django.shortcuts import redirect
-    #     if 'sessionid' in request.session:
-    #         board = Board.objects.get(board_id=request.GET['board_id'])  # board_id로 Board정보 가져오기
-    #         context = {'board': board}
-    #
-    #         return render(request, 'clip/detail.html', context)
-    #     else:
-    #         return redirect('/login')
 
     @request_mapping("/wiki/detail/", method="get")
     def wiki_detail(self, request):
