@@ -9,12 +9,60 @@
 </style>
 {% extends 'base.html' %}
 {% block content %}
+        <!-- 20220314 수정1 시작 -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script type="text/javascript">
+        /*
+            let msg = document.getElementById("board_id") ;
+            if( msg != null ) {
+                alert( msg );
+            }
+        */
+            function clip_delete(board_id){
+                if(confirm("삭제하시겠습니까?")){
+
+                    $('#board_id').val('');
+                    $('#board_id').val(board_id);
+
+                    data = $('#board_id').val();
+
+                    $.ajax({
+                        type:'POST',
+                        url:'/clip/delete/',
+                        data:JSON.stringify(data),
+                        success:function(json){
+                            console.log(json['result']);
+                            if(json['result'] == 'fail'){
+                                alert('내부 로직 문제.');
+                            }else {
+                                alert('정상적으로 삭제하였습니다.');
+                                location.reload();
+                            }
+
+                        },
+                        error : function(xhr,errmsg,err) {
+                            alert('데이터 오류.');
+                        }
+                    });
+                }
+            }
+
+        </script>
+        <form name="procForm" method="post" >
+            <input type="hidden" id="board_id" name="board_id" />
+            {% if messages %}
+            <input type="hidden" id="msg" name="msg" value="{{ messages }}" />
+            {% endif %}
+        </form>
+        <!-- 20220314 수정1 끝 -->
         <div class="container-fluid">
             <nav>
                 <div class="container">
                 <table class="table">
                         <thead class="thead-light">
-                        <tr class="thead"> <th>번호</th><th>제목</th><th>게시판</th><th>글쓴이</th><th>날짜</th></tr>
+                        <!-- 20220314 수정2 삭제 추가 -->
+                        <tr class="thead"> <th>번호</th><th>제목</th><th>게시판</th><th>글쓴이</th><th>날짜</th><th>삭제</th></tr>
                         </thead>
                         <tbody>
 
@@ -34,6 +82,10 @@
                             </td>
                             <td>
                                 {{o.board_date | date:'Y-m-d H:i'}}
+                            </td>
+                            <!-- 20220314 수정3 삭제 추가 -->
+                            <td>
+                                <button type="button" id="submit" class="btn btn-danger" onclick="javascript:clip_delete({{ o.board_id }}); return false; " >삭제</button>
                             </td>
                         </tr>
                         {% endfor %}
