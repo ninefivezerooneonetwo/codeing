@@ -106,12 +106,20 @@ class MyView(View):
 
     @request_mapping("/", method="get")
     def home(self,request):
-        objs = Board.objects.order_by('-board_date').all();
-
+        objs_notice = Board.objects.order_by('-board_date').filter(board='공지')[:5];
+        objs_info = Board.objects.order_by('-board_date').filter(board='정보')[:5];
+        objs_free = Board.objects.order_by('-board_date').filter(board='자유')[:5];
+        objs_qna = Board.objects.order_by('-board_date').filter(board='질문')[:5];
+        objs_study = Board.objects.order_by('-board_date').filter(board='스터디')[:5];
+        objs_project = Board.objects.order_by('-board_date').filter(board='프로젝트')[:5];
         context = {
-            'objs': objs
-        };
-
+            'objs_notice':objs_notice,
+            'objs_info': objs_info,
+            'objs_free':objs_free,
+            'objs_qna' : objs_qna,
+            'objs_study':objs_study,
+            'objs_project':objs_project
+        }
         return render(request,'home.html',context);
 
     # 검색

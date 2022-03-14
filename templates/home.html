@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
         <div class="container-fluid">
-
-
-<!--                        Make sure to keep all page content within the-->
-<!--                        <code>#page-content-wrapper</code>-->
-<!--                        . The top navbar is optional, and just for demonstration. Just create an element with the-->
-<!--                        <code>#sidebarToggle</code>-->
-<!--                        ID which will toggle the menu when clicked.-->
-
-
             <nav>
                 <div class="container">
                     <table class="table" >
@@ -22,13 +13,10 @@
                                 <a href="/notice/notice" style="text-decoration : none;">공지사항</a>
                             </td>
                             <td><ul>
-                            {% for o in objs %}
-                            {% if o.board == '공지' %}
-
+                            {% for o in objs_notice %}
 
                                 <li><a href="/notice/notice">{{o.board_title}}</a></li>
 
-                            {% endif %}
                             {% endfor %}
                             </ul></td>
                         </tr>
@@ -38,13 +26,10 @@
                             </td>
                             </td>
                             <td><ul>
-                            {% for o in objs %}
-                            {% if o.board == '정보' %}
-
+                            {% for o in objs_info %}
 
                                 <li><a href="/info/info">{{o.board_title}}</a></li>
 
-                            {% endif %}
                             {% endfor %}
                             </ul></td>
                         </tr>
@@ -54,13 +39,10 @@
                             </td>
                             </td>
                             <td><ul>
-                            {% for o in objs %}
-                            {% if o.board == '자유' %}
-
+                            {% for o in objs_free %}
 
                                 <li><a href="/free/free">{{o.board_title}}</a></li>
 
-                            {% endif %}
                             {% endfor %}
                             </ul></td>
                         </tr>
@@ -70,13 +52,8 @@
                             </td>
                             </td>
                             <td><ul>
-                            {% for o in objs %}
-                            {% if o.board == '질문' %}
-
-
+                            {% for o in objs_qna %}
                                 <li><a href="/qna/qna">{{o.board_title}}</a></li>
-
-                            {% endif %}
                             {% endfor %}
                             </ul></td>
                         </tr>
@@ -86,13 +63,10 @@
                             </td>
                             </td>
                             <td><ul>
-                            {% for o in objs %}
-                            {% if o.board == '스터디' %}
-
+                            {% for o in objs_study %}
 
                                 <li><a href="/study/study">{{o.board_title}}</a></li>
 
-                            {% endif %}
                             {% endfor %}
                             </ul></td>
                         </tr>
@@ -102,13 +76,10 @@
                             </td>
                             </td>
                             <td><ul>
-                            {% for o in objs %}
-                            {% if o.board == '프로젝트' %}
-
+                            {% for o in objs_project %}
 
                                 <li><a href="/project/project">{{o.board_title}}</a></li>
 
-                            {% endif %}
                             {% endfor %}
                             </ul></td>
                         </tr>
