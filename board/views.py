@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
@@ -616,3 +617,14 @@ class MyView(View):
             del request.session['sessionid']
 
         return render(request, 'home.html')
+
+    @request_mapping("/mypage", method="get")
+    def mypage(self, request):
+        user_name = request.session['sessionname']
+
+        user = User.objects.get(user_name=user_name)
+        context = {
+            'user': user
+        }
+        return render(request, 'mypage.html', context)
+
