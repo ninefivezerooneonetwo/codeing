@@ -125,7 +125,7 @@
                     <!-- 220315 코드 추가 - 댓글 목록 / 작성  -->
                 <br>
                     <strong>댓글</strong> <br>
-                  {% for comment in comments %}
+                  {% for comment in objs %}
 
                     <div class="comment form-control" style="padding: 3px 6px; margin:1px;">
                         {{comment.comment_content}}
@@ -141,12 +141,17 @@
             </form>
                   <br><br>
                   댓글 달기 :
-                  <form action="/clip/comment"   method="post">
+                  <form action="/clip/comment/{{board.board_id}}"   method="post">
                     {% csrf_token %}
                     <input name="content" class="form-control" type="text" value=""required>
                       <input type="hidden" name="board_id" value="{{board.board_id}}">
                     <input class="btn btn-primary" type="submit" value="작성">
                   </form>
+            {% if center != None %}
+                {% include center %}
+            {% else %}
+                <section></section>
+            {% endif %}
             <div class="row">
                 <div class="col-auto">
                     {% if board.board == '자유' %}
