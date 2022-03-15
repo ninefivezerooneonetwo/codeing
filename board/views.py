@@ -103,10 +103,15 @@ class MyView(View):
     @request_mapping("/clip/detail/", method="get")
     def scrap_detail(self, request):
         from django.shortcuts import redirect
+        commentpage = Comment.objects.filter(board_id=request.GET['board_id'])
+        page = request.GET.get('page', '1');
+        paginator = Paginator(commentpage, '10');
+        page_obj = paginator.get_page(page);
+
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=request.GET['board_id']) # board_id로 Board정보 가져오기
             comments = Comment.objects.filter(board=board.board_id)
-            context = {'board':board, 'comments':comments}
+            context = {'board':board, 'comments':comments,'objs': page_obj}
 
             return render(request, 'clip/detail.html', context)
         else :
@@ -127,7 +132,7 @@ class MyView(View):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=request.POST['board_id'])  # board_id로 Board정보 가져오기
             user = User.objects.get(user_id=request.session['sessionid'])
-            comments = Comment.objects.filter(board=board.board_id)
+
 
             comment = Comment();
             comment.user = user
@@ -136,11 +141,8 @@ class MyView(View):
             comment.comment_content = request.POST['content']
             comment.save()
 
-            context = {'board': board,
-                       'comment': comment,
-                       'comments': comments}
 
-            return render(request, 'clip/detail.html', context)
+            return redirect('/clip/detail?board_id={}'.format(request.POST['board_id']))
         else:
             return redirect('/login')
 
@@ -149,7 +151,7 @@ class MyView(View):
         from django.shortcuts import redirect
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)  # board_id로 Board정보 가져오기
-            user = User.objects.get(user_id=request.session['sessionid'])
+
             comments = Comment.objects.filter(board=board.board_id)
             comment = Comment.objects.get(comment_id=c_id);
 
@@ -166,19 +168,14 @@ class MyView(View):
         from django.shortcuts import redirect
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)  # board_id로 Board정보 가져오기
-            user = User.objects.get(user_id=request.session['sessionid'])
-            comments = Comment.objects.filter(board=board.board_id)
+
 
             comment = Comment.objects.get(comment_id=c_id);
             comment.comment_date = timezone.now()
             comment.comment_content = request.POST['content']
             comment.save()
 
-            context = {'board': board,
-                       'comment': comment,
-                       'comments': comments}
-
-            return render(request, 'clip/detail.html', context)
+            return redirect('/clip/detail?board_id={}'.format(b_id))
         else:
             return redirect('/login')
 
@@ -187,17 +184,14 @@ class MyView(View):
         from django.shortcuts import redirect
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)  # board_id로 Board정보 가져오기
-            user = User.objects.get(user_id=request.session['sessionid'])
-            comments = Comment.objects.filter(board=board.board_id)
+
 
             comment = Comment.objects.get(comment_id=c_id);
             comment.delete();
 
-            context = {'board': board,
-                       'comment': comment,
-                       'comments': comments}
 
-            return render(request, 'clip/detail.html', context)
+
+            return redirect('/clip/detail?board_id={}'.format(b_id))
         else:
             return redirect('/login')
 
