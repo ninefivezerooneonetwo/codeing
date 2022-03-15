@@ -6,7 +6,45 @@
 </style>
 {% extends 'base.html' %}
 {% block content %}
-
+<style>
+{% if board.board == '자유' %}
+#codeing_free_nav{
+    background:blue;
+    font-weight:bold;
+    color:white;
+    }
+{% elif board.board == '정보' %}
+#codeing_info_nav{
+    background:blue;
+    font-weight:bold;
+    color:white;
+    }
+{% elif board.board == '공지' %}
+#codeing_notice_nav{
+    background:blue;
+    font-weight:bold;
+    color:white;
+    }
+{% elif board.board == '질문' %}
+#codeing_qna_nav{
+    background:blue;
+    font-weight:bold;
+    color:white;
+    }
+{% elif board.board == '스터디' %}
+#codeing_study_nav{
+    background:blue;
+    font-weight:bold;
+    color:white;
+    }
+{% elif board.board == '프로젝트' %}
+#codeing_project_nav{
+    background:blue;
+    font-weight:bold;
+    color:white;
+    }
+{% endif %}
+</style>
         <div class="container">
             <form method="post">
                 {% csrf_token %}
@@ -86,39 +124,44 @@
                 </div>
                     <!-- 220315 코드 추가 - 댓글 목록 / 작성  -->
                 <br>
-                <div class="container">
-                  댓글 <br>
+                    <strong>댓글</strong> <br>
                   {% for comment in comments %}
-                    <div class="comment">
-                        {{comment.comment_content}} - {{comment.user.user_id}} <br>
-                        <div id="comment_box">
-                          - {{comment.comment_date}}
+
+                    <div class="comment form-control" style="padding: 3px 6px; margin:1px;">
+                        {{comment.comment_content}}
+                        <div id="comment_box" >
+                          작성자:{{comment.user.user_id}} - 작성일:{{comment.comment_date | date:'Y-m-d H:i' }}
                          {% if request.session.sessionid == comment.user.user_id %}
                         <a href="/clip/comment/uv/{{board.board_id}}/{{comment.comment_id}}">수정</a>  <a href="/clip/comment/d/{{board.board_id}}/{{comment.comment_id}}">삭제</a>
-                    {% endif %}
+                        {% endif %}
                         </div>
                     </div>
-
-
-                  <br>
                   {% endfor %}
-                    </form>
+            </form>
                   <br><br>
                   댓글 달기 :
-                  <form action="/clip/comment"  method="post">
+                  <form action="/clip/comment"   method="post">
                     {% csrf_token %}
-                    <input name="content" type="text" value="">
+                    <input name="content" class="form-control" type="text" value=""required>
                       <input type="hidden" name="board_id" value="{{board.board_id}}">
                     <input class="btn btn-primary" type="submit" value="작성">
                   </form>
-
+            <div class="row">
+                <div class="col-auto">
+                    {% if board.board == '자유' %}
+                    <input class="btn btn-primary" type="button" role="button" onclick="location.href='/free/free'" value="목록으로">
+                    {% elif board.board == '정보' %}
+                    <input class="btn btn-primary" type="button" role="button" onclick="location.href='/info/info'" value="목록으로">
+                    {% elif board.board == '공지' %}
+                    <input class="btn btn-primary" type="button" role="button" onclick="location.href='/notice/notice'" value="목록으로">
+                    {% elif board.board == '질문' %}
+                    <input class="btn btn-primary" type="button" role="button" onclick="location.href='/qna/qna'" value="목록으로">
+                    {% elif board.board == '스터디' %}
+                    <input class="btn btn-primary" type="button" role="button" onclick="location.href='/study/study'" value="목록으로">
+                    {% elif board.board == '프로젝트' %}
+                    <input class="btn btn-primary" type="button" role="button" onclick="location.href='/project/project'" value="목록으로">
+                    {% endif %}
                 </div>
-                <div class="row">
-                    <div class="col-auto mr-auto"></div>
-                    <div class="col-auto">
-                        <input class="btn btn-primary" type="button" role="button" onclick="location.href='/scrap/scrap/'" value="목록으로">
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
 {% endblock %}

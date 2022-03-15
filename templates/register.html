@@ -5,17 +5,17 @@
                 <div class="container">
                    <form action="registerimpl" method="post">
                         {% csrf_token %}
-                        ID <input type="text" name="user_id"><br>
-                        비밀번호 <input type="text" name="user_pwd"><br>
-                        이름 <input type="text" name="user_name"><br>
-                        E-MAIL <input type="text" name="user_email"><br>
-                        전화번호 <input type="text" name="user_phone"><br>
-                        선호기업1 <input type="text" name="favcom1"><br>
-                        선호기업2 <input type="text" name="favcom2"><br>
-                        선호언어1 <input type="text" name="favlang1"><br>
-                        선호언어2 <input type="text" name="favlang2"><br>
-                        <input type="submit" value="register">
-                        <input type="reset" value="reset">
+                        ID <input class="form-control" type="text" name="user_id" required><br>
+                        비밀번호 <input class="form-control" type="password" name="user_pwd" required><br>
+                        이름 <input  class="form-control"type="text" name="user_name" required><br>
+                        E-MAIL <input class="form-control" type="text" name="user_email" required><br>
+                        전화번호 <input class="form-control"type="number" name="user_phone" required><br>
+                        선호기업1 <input class="form-control"type="text" name="favcom1" required><br>
+                        선호기업2 <input class="form-control"type="text" name="favcom2" required><br>
+                        선호언어1 <input class="form-control"type="text" name="favlang1" required><br>
+                        선호언어2 <input class="form-control"type="text" name="favlang2" required><br>
+                        <input class="btn btn-primary" type="submit" value="회원가입">
+                        <input class="btn btn-primary" type="reset" value="모두 삭제">
                    </form>
                 </div>
             </nav>

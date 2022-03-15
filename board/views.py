@@ -304,7 +304,7 @@ class MyView(View):
                 data.save()
                 return render(request, 'notice/postok.html');
         except:  # id 값이 없으므로 에러가 남
-            return render(request, 'notice/postfail.html');
+            return render(request, 'postfail.html');
 
 
 
