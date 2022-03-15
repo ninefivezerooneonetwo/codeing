@@ -19,7 +19,7 @@
                                 {% for post in search_boards %}
                                  <tr>
                                     <td>{{post.board_id}}</td>
-                                    <td><a href="/clip/detail?board_id={{ post.board_id }}">{{post.board_title}}</a></td>
+                                    <td><a href="/clip/detail/{{ post.board_id }}">{{post.board_title}}</a></td>
                                     <td>{{post.user_id}}</td>
                                     <td>{{post.board_date | date:'Y-m-d H:i'}}</td>
                                  </tr>
