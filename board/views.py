@@ -1,7 +1,6 @@
-from django.contrib.auth import authenticate
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django_request_mapping import request_mapping
 from board.models import Board, User, Wiki, Revision, Comment
@@ -164,9 +163,6 @@ class MyView(View):
     def comment_update(self, request, b_id, c_id):
         from django.shortcuts import redirect
         if 'sessionid' in request.session:
-
-
-
             comment = Comment.objects.get(comment_id=c_id);
             comment.comment_date = timezone.now()
             comment.comment_content = request.POST['content']
@@ -180,20 +176,12 @@ class MyView(View):
     def comment_delete(self, request, b_id, c_id):
         from django.shortcuts import redirect
         if 'sessionid' in request.session:
-
-
-
             comment = Comment.objects.get(comment_id=c_id);
             comment.delete();
-
-
 
             return redirect('/clip/detail/{}'.format(b_id))
         else:
             return redirect('/login')
-
-
-    # ================================================================
 
     @request_mapping("/", method="get")
     def home(self,request):
@@ -300,7 +288,42 @@ class MyView(View):
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
 
+    # 공지 UD
+    @request_mapping("/notice/uv/<int:b_id>/", method="get")
+    def notice_updateView(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
 
+            context = {
+                'board': board
+            }
+            return render(request, 'notice/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/notice/u/<int:b_id>/", method="post")
+    def notice_update(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.board_title = request.POST['title']
+            board.board_content = request.POST['content']
+            board.wiki_title = request.POST['wiki'];
+            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            board.save()
+
+            return redirect('/clip/detail/{}'.format(b_id))
+        else:
+            return redirect('/login')
+
+    @request_mapping("/notice/d/<int:b_id>/", method="get")
+    def notice_delete(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.delete()
+
+            return redirect('/notice/notice')
+        else:
+            return redirect('/login')
 
     # ================================================================
 
@@ -341,7 +364,42 @@ class MyView(View):
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
 
+    # 정보 UD
+    @request_mapping("/info/uv/<int:b_id>/", method="get")
+    def info_updateView(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
 
+            context = {
+                'board': board
+            }
+            return render(request, 'info/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/info/u/<int:b_id>/", method="post")
+    def info_update(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.board_title = request.POST['title']
+            board.board_content = request.POST['content']
+            board.wiki_title = request.POST['wiki'];
+            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            board.save()
+
+            return redirect('/clip/detail/{}'.format(b_id))
+        else:
+            return redirect('/login')
+
+    @request_mapping("/info/d/<int:b_id>/", method="get")
+    def info_delete(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.delete()
+
+            return redirect('/info/info')
+        else:
+            return redirect('/login')
 
     # ================================================================
     @request_mapping("/free/free", method="get") #자유게시판
@@ -383,7 +441,43 @@ class MyView(View):
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
 
+    # 2022-03-16 코드 추가
+    # 자유 UD
+    @request_mapping("/free/uv/<int:b_id>/", method="get")
+    def free_updateView(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
 
+            context = {
+                'board': board
+            }
+            return render(request, 'free/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/free/u/<int:b_id>/", method="post")
+    def free_update(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.board_title = request.POST['title']
+            board.board_content = request.POST['content']
+            board.wiki_title = request.POST['wiki'];
+            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            board.save()
+
+            return redirect('/clip/detail/{}'.format(b_id))
+        else:
+            return redirect('/login')
+
+    @request_mapping("/free/d/<int:b_id>/", method="get")
+    def free_delete(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.delete()
+
+            return redirect('/free/free')
+        else:
+            return redirect('/login')
 
     # ================================================================
     @request_mapping("/qna/qna", method="get") #질문게시판
@@ -424,7 +518,42 @@ class MyView(View):
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
 
+    # 질문 UD
+    @request_mapping("/qna/uv/<int:b_id>/", method="get")
+    def qna_updateView(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
 
+            context = {
+                'board': board
+            }
+            return render(request, 'qna/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/qna/u/<int:b_id>/", method="post")
+    def qna_update(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.board_title = request.POST['title']
+            board.board_content = request.POST['content']
+            board.wiki_title = request.POST['wiki'];
+            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            board.save()
+
+            return redirect('/clip/detail/{}'.format(b_id))
+        else:
+            return redirect('/login')
+
+    @request_mapping("/qna/d/<int:b_id>/", method="get")
+    def qna_delete(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.delete()
+
+            return redirect('/qna/qna')
+        else:
+            return redirect('/login')
 
     # ================================================================
     @request_mapping("/project/project", method="get") #프로젝트
@@ -473,6 +602,48 @@ class MyView(View):
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
 
+    # 프로젝트 UD
+    @request_mapping("/project/uv/<int:b_id>/", method="get")
+    def project_updateView(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+
+            context = {
+                'board': board
+            }
+            return render(request, 'project/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/project/u/<int:b_id>/", method="post")
+    def project_update(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.board_title = request.POST['board_title']
+            board.board_content = request.POST['board_content']
+            board.board_num = request.POST['board_num']
+            board.board_place = request.POST['board_place']
+            board.board_phone = request.POST['board_phone']
+            board.board_on_off = request.POST['board_on_off']
+            board.board_recruitdate = request.POST['board_recruitdate']
+            board.board_time = request.POST['board_time']
+            board.wiki_title = request.POST['wiki'];
+            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            board.save()
+
+            return redirect('/clip/detail/{}'.format(b_id))
+        else:
+            return redirect('/login')
+
+    @request_mapping("/project/d/<int:b_id>/", method="get")
+    def project_delete(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.delete()
+
+            return redirect('/project/project')
+        else:
+            return redirect('/login')
 
 
     # ================================================================
@@ -522,7 +693,48 @@ class MyView(View):
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
 
+    # 스터디 UD
+    @request_mapping("/study/uv/<int:b_id>/", method="get")
+    def study_updateView(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
 
+            context = {
+                'board': board
+            }
+            return render(request, 'study/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/study/u/<int:b_id>/", method="post")
+    def study_update(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.board_title = request.POST['board_title']
+            board.board_content = request.POST['board_content']
+            board.board_num = request.POST['board_num']
+            board.board_place = request.POST['board_place']
+            board.board_phone = request.POST['board_phone']
+            board.board_on_off = request.POST['board_on_off']
+            board.board_recruitdate = request.POST['board_recruitdate']
+            board.board_time = request.POST['board_time']
+            board.wiki_title = request.POST['wiki'];
+            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            board.save()
+
+            return redirect('/clip/detail/{}'.format(b_id))
+        else:
+            return redirect('/login')
+
+    @request_mapping("/study/d/<int:b_id>/", method="get")
+    def study_delete(self, request, b_id):
+        if 'sessionid' in request.session:
+            board = Board.objects.get(board_id=b_id)
+            board.delete()
+
+            return redirect('/study/study')
+        else:
+            return redirect('/login')
 
     # ================================================================
     @request_mapping("/post", method="get")
@@ -657,4 +869,3 @@ class MyView(View):
             'user': user
         }
         return render(request, 'mypage.html', context)
-
