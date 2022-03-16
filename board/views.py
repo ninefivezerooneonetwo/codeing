@@ -273,7 +273,8 @@ class MyView(View):
 
     @request_mapping("/notice/post", method="get")  # 공지사항
     def noticepost(self, request):
-
+        if 'admin' != request.session['sessionid']:
+            return render(request, 'notice/noadmin.html');
         return render(request, 'notice/post.html');
 
     @request_mapping("/notice/notice/p", method="post")  # 공지사항
@@ -291,6 +292,8 @@ class MyView(View):
     # 공지 UD
     @request_mapping("/notice/uv/<int:b_id>/", method="get")
     def notice_updateView(self, request, b_id):
+        if 'admin' != request.session['sessionid']:
+            return render(request, 'notice/noadmin.html');
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
 
@@ -303,12 +306,14 @@ class MyView(View):
 
     @request_mapping("/notice/u/<int:b_id>/", method="post")
     def notice_update(self, request, b_id):
+        if 'admin' != request.session['sessionid']:
+            return render(request, 'notice/noadmin.html');
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
-            board.wiki_title = request.POST['wiki'];
-            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+
+
             board.save()
 
             return redirect('/clip/detail/{}'.format(b_id))
@@ -317,6 +322,8 @@ class MyView(View):
 
     @request_mapping("/notice/d/<int:b_id>/", method="get")
     def notice_delete(self, request, b_id):
+        if 'admin' != request.session['sessionid']:
+            return render(request, 'notice/noadmin.html');
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
             board.delete()
@@ -862,9 +869,9 @@ class MyView(View):
 
     @request_mapping("/mypage", method="get")
     def mypage(self, request):
-        user_name = request.session['sessionname']
+        user_id = request.session['sessionid']
 
-        user = User.objects.get(user_name=user_name)
+        user = User.objects.get(user_id=user_id)
         context = {
             'user': user
         }

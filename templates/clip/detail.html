@@ -44,6 +44,7 @@
     color:white;
     }
 {% endif %}
+
 </style>
         <div class="container">
             <form method="post">
@@ -131,28 +132,33 @@
                 {% if request.session.sessionid == board.user.user_id %}
                     {% if board.board == '자유' %}
                         <div class="container">
-                            <button><a href="/free/uv/{{board.board_id}}">수정</a></button>
-                            <button><a href="/free/d/{{board.board_id}}">삭제</a></button>
+                            <a class="btn btn-primary" href="/free/uv/{{board.board_id}}">수정</a>
+                            <a class="btn btn-primary" href="/free/d/{{board.board_id}}">삭제</a>
+                        </div>
+                    {% elif board.board == '공지' %}
+                         <div class="container">
+                             <a class="btn btn-primary" href="/notice/uv/{{board.board_id}}">수정</a>
+                             <a class="btn btn-primary" href="/notice/d/{{board.board_id}}">삭제</a>
                         </div>
                     {% elif board.board == '질문' %}
                          <div class="container">
-                             <button><a href="/qna/uv/{{board.board_id}}">수정</a></button>
-                             <button><a href="/qna/d/{{board.board_id}}">삭제</a></button>
+                             <a class="btn btn-primary" href="/qna/uv/{{board.board_id}}">수정</a>
+                             <a class="btn btn-primary" href="/qna/d/{{board.board_id}}">삭제</a>
                         </div>
                     {% elif board.board == '정보' %}
                          <div class="container">
-                             <button><a href="/info/uv/{{board.board_id}}">수정</a></button>
-                             <button><a href="/info/d/{{board.board_id}}">삭제</a></button>
+                             <a class="btn btn-primary" href="/info/uv/{{board.board_id}}">수정</a>
+                             <a class="btn btn-primary" href="/info/d/{{board.board_id}}">삭제</a>
                         </div>
                     {% elif board.board == '스터디' %}
                          <div class="container">
-                             <button><a href="/study/uv/{{board.board_id}}">수정</a></button>
-                             <button><a href="/study/d/{{board.board_id}}">삭제</a></button>
+                             <a class="btn btn-primary" href="/study/uv/{{board.board_id}}">수정</a>
+                             <a class="btn btn-primary" href="/study/d/{{board.board_id}}">삭제</a>
                         </div>
                     {% elif board.board == '프로젝트' %}
                          <div class="container">
-                             <button><a href="/project/uv/{{board.board_id}}">수정</a></button>
-                             <button><a href="/project/d/{{board.board_id}}">삭제</a></button>
+                             <a class="btn btn-primary" href="/project/uv/{{board.board_id}}">수정</a>
+                             <a class="btn btn-primary" href="/project/d/{{board.board_id}}">삭제</a>
                         </div>
                     {% endif %}
                 {% endif %}
