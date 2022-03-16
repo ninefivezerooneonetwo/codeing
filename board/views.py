@@ -218,6 +218,9 @@ class MyView(View):
     def search(self,request):
         context =[];
         search_type = request.GET['type']
+        if request.GET['q'] =='':
+            context={'message':'검색어는 2글자 이상 입력해주세요.'}
+            return render(request,'search_board.html', context);
         search_word = request.GET['q']
         board_list = Board.objects.select_related('user');
         print(search_type, search_word)
@@ -605,7 +608,21 @@ class MyView(View):
             if user.user_pwd == user_pwd:
                 request.session['sessionid'] = user.user_id;
                 request.session['sessionname'] = user.user_name;
-                return render(request, 'home.html');
+                objs_notice = Board.objects.order_by('-board_date').filter(board='공지')[:5];
+                objs_info = Board.objects.order_by('-board_date').filter(board='정보')[:5];
+                objs_free = Board.objects.order_by('-board_date').filter(board='자유')[:5];
+                objs_qna = Board.objects.order_by('-board_date').filter(board='질문')[:5];
+                objs_study = Board.objects.order_by('-board_date').filter(board='스터디')[:5];
+                objs_project = Board.objects.order_by('-board_date').filter(board='프로젝트')[:5];
+                context = {
+                    'objs_notice': objs_notice,
+                    'objs_info': objs_info,
+                    'objs_free': objs_free,
+                    'objs_qna': objs_qna,
+                    'objs_study': objs_study,
+                    'objs_project': objs_project
+                }
+                return render(request, 'home.html',context);
             else:
                 raise Exception
         except:
@@ -615,8 +632,21 @@ class MyView(View):
     def logout(self, request):
         if request.session['sessionid'] != None:
             del request.session['sessionid']
-
-        return render(request, 'home.html')
+        objs_notice = Board.objects.order_by('-board_date').filter(board='공지')[:5];
+        objs_info = Board.objects.order_by('-board_date').filter(board='정보')[:5];
+        objs_free = Board.objects.order_by('-board_date').filter(board='자유')[:5];
+        objs_qna = Board.objects.order_by('-board_date').filter(board='질문')[:5];
+        objs_study = Board.objects.order_by('-board_date').filter(board='스터디')[:5];
+        objs_project = Board.objects.order_by('-board_date').filter(board='프로젝트')[:5];
+        context = {
+            'objs_notice': objs_notice,
+            'objs_info': objs_info,
+            'objs_free': objs_free,
+            'objs_qna': objs_qna,
+            'objs_study': objs_study,
+            'objs_project': objs_project
+        }
+        return render(request, 'home.html',context)
 
     @request_mapping("/mypage", method="get")
     def mypage(self, request):

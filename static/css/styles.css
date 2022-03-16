@@ -11343,3 +11343,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     border-top:dotted 1px #ddd;
     font-size:0.7em;
 }
+
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+a {
+  text-decoration-line: none;
+
+}

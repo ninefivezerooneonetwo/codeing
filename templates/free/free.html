@@ -10,10 +10,10 @@
         <div class="container-fluid">
             <nav>
                 <div class="container">
-                    <table class="table">
+                    <table class="table" >
                         <thead class="thead-light">
                         <!-- 2220312 코드 추가 스크랩추가 -->
-                        <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>스크랩</th></tr>
+                        <tr class="thead text-center"> <th scope="col">번호</th><th scope="col">제목</th><th scope="col">글쓴이</th><th scope="col">날짜</th><th scope="col">스크랩</th></tr>
                         </thead>
                         <tbody>
                         {% for o in objs %}
@@ -22,18 +22,18 @@
                             <td scope="row">
                                 <span>{{ o.board_id }}</span>
                             </td>
-                            <td>
+                            <td scope="row">
                                 <!-- 2220312 코드 추가 스크랩추가 -->
                                 <a href="/clip/detail/{{ o.board_id }}" >{{o.board_title}}</a>
                             </td>
-                            <td>
+                            <td scope="row">
                                 {{o.user_id}}
                             </td>
-                            <td>
+                            <td scope="row">
                                 {{o.board_date | date:'Y-m-d H:i'}}
                             </td>
                             <!-- 2220312 코드 추가 스크랩추가 -->
-                            <td>
+                            <td scope="row">
                                 <button type="button" class="btn btn-info" onclick="location.href='/notice/scrap?board_id={{ o.board_id }}&type=free'" >스크랩</button>
                             </td>
                         </tr>

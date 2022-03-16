@@ -3,13 +3,16 @@
         <div class="container-fluid">
             <nav>
                 <div class="container">
+                    <h1>검색 결과</h1>
                     <table class="table">
                         <thead class="thead-light">
-                        <tr class="thead"> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
+                        {% if search_boards %}
+                        <tr class="thead "> <th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
                         </thead>
+                        {% endif %}
                         <tbody>
                         <div id='content'>
-                        <h1>Search Result</h1>
+
 
                         {%if message%}
                                 <b><i>{{message}}</i></b>

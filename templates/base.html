@@ -11,6 +11,9 @@
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -34,7 +37,7 @@
         <!-- Top navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container-fluid">
-                <button class="btn btn-primary" id="sidebarToggle">메뉴</button>
+                <button class="btn btn-primary" id="sidebarToggle" >메뉴</button>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -56,21 +59,21 @@
                                                         <input type="text" name="q" value="{{ q }}" class="form-control form-control-md"
                                                             style="width: 15em;" placeholder="검색어를 입력해주세요.">
                                                     </div>
-                                                    <div class="sear">
+                                                    <div class="sear" style="margin-top: 10px;">
                                                          <button class="btn btn-md btn-outline-dark" type="submit">검색</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                        <li class="nav-item active"><a class="nav-link" href="/">홈으로</a></li>
+                        <li class="nav-item active"><a class="nav-link" style="margin-top: 10px;" href="/">홈으로</a></li>
 
                         {% if request.session.sessionid == None %}
-                        <li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">회원가입</a></li>
+                        <li class="nav-item"><a class="nav-link" style="margin-top: 10px;" href="/login">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" style="margin-top: 10px;" href="/register">회원가입</a></li>
                         {% else %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.session.sessionname }}</a>
+                        <li class="nav-item dropdown" style="margin-top: 10px;">
+                            <a class="nav-link dropdown-toggle"  id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.session.sessionname }}</a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                 <a class="dropdown-item" href="/mypage">회원 정보</a>

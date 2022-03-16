@@ -1,11 +1,15 @@
+<style>
+    li{ list-style-type : none }
+</style>
 {% extends 'base.html' %}
 {% block content %}
+
         <div class="container-fluid">
             <nav>
                 <div class="container">
                     <table class="table" >
                         <thead style="border-bottom: solid black 1px;">
-                        <tr class="thead"> <th>게시판</th><th>내용</th></tr>
+                        <tr class="thead"> <th>게시판</th><th>내용</th><th>글쓴이</th></tr>
                         </thead>
                         <tbody>
                         <tr>
@@ -15,10 +19,15 @@
                             <td><ul>
                             {% for o in objs_notice %}
 
-                                <li><a href="/notice/notice">{{o.board_title}}</a></li>
+                                <li><a href="/clip/detail/{{ o.board_id }}">{{o.board_title}}</a></li>
 
                             {% endfor %}
                             </ul></td>
+                            <ul><td>
+                                {% for o in objs_notice %}
+                                <li>{{o.user_id}}</li>
+                                {% endfor %}
+                            </td></ul>
                         </tr>
                         <tr>
                             <td>
@@ -28,10 +37,15 @@
                             <td><ul>
                             {% for o in objs_info %}
 
-                                <li><a href="/info/info">{{o.board_title}}</a></li>
+                                <li><a href="/clip/detail/{{ o.board_id }}">{{o.board_title}}</a></li>
 
                             {% endfor %}
                             </ul></td>
+                            <ul><td>
+                                {% for o in objs_info %}
+                                <li>{{o.user_id}}</li>
+                                {% endfor %}
+                            </td></ul>
                         </tr>
                         <tr>
                             <td>
@@ -41,10 +55,15 @@
                             <td><ul>
                             {% for o in objs_free %}
 
-                                <li><a href="/free/free">{{o.board_title}}</a></li>
+                                <li><a href="/clip/detail/{{ o.board_id }}">{{o.board_title}}</a></li>
 
                             {% endfor %}
                             </ul></td>
+                            <ul><td>
+                                {% for o in objs_free %}
+                                <li>{{o.user_id}}</li>
+                                {% endfor %}
+                            </td></ul>
                         </tr>
                         <tr>
                             <td>
@@ -53,9 +72,14 @@
                             </td>
                             <td><ul>
                             {% for o in objs_qna %}
-                                <li><a href="/qna/qna">{{o.board_title}}</a></li>
+                                <li><a href="/clip/detail/{{ o.board_id }}">{{o.board_title}}</a></li>
                             {% endfor %}
                             </ul></td>
+                            <ul><td>
+                                {% for o in objs_qna %}
+                                <li>{{o.user_id}}</li>
+                                {% endfor %}
+                            </td></ul>
                         </tr>
                         <tr>
                             <td>
@@ -65,10 +89,15 @@
                             <td><ul>
                             {% for o in objs_study %}
 
-                                <li><a href="/study/study">{{o.board_title}}</a></li>
+                                <li><a href="/clip/detail/{{ o.board_id }}">{{o.board_title}}</a></li>
 
                             {% endfor %}
                             </ul></td>
+                            <ul><td>
+                                {% for o in objs_study %}
+                                <li>{{o.user_id}}</li>
+                                {% endfor %}
+                            </td></ul>
                         </tr>
                         <tr>
                             <td>
@@ -78,10 +107,15 @@
                             <td><ul>
                             {% for o in objs_project %}
 
-                                <li><a href="/project/project">{{o.board_title}}</a></li>
+                                <li><a href="/clip/detail/{{ o.board_id }}">{{o.board_title}}</a></li>
 
                             {% endfor %}
                             </ul></td>
+                            <ul><td>
+                                {% for o in objs_project %}
+                                <li>{{o.user_id}}</li>
+                                {% endfor %}
+                            </td></ul>
                         </tr>
                         </tbody>
                     </table>
