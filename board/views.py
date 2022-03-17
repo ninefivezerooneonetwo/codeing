@@ -124,6 +124,8 @@ class MyView(View):
         return render(request, 'wiki/detail_wiki.html', context)
 
 
+
+
     # ======================================================= 댓글 CRUD
     @request_mapping("/clip/comment/<int:b_id>", method="post")
     def comment_add(self, request, b_id):
@@ -868,6 +870,38 @@ class MyView(View):
             return render(request, 'wiki/postok.html');
         except:  # id 값이 없으므로 에러가 남
             return render(request, 'postfail.html');
+
+    @request_mapping("/wiki/uv/<int:w_id>/", method="get")
+    def wiki_updateView(self, request, w_id):
+        if 'sessionid' in request.session:
+            wiki = Wiki.objects.get(wiki_id=w_id)
+            # wikis = Wiki.objects.all()
+            # objs = [];
+            # for i in range(0, len(wiki)):
+            #     objs.append(wiki[i].wiki_title)
+
+            context = {
+                'wiki': wiki,
+                # 'objs': objs,
+            }
+            return render(request, 'wiki/update.html', context)
+        else:
+            return redirect('/home')
+
+    @request_mapping("/wiki/u/<int:w_id>/", method="post")
+    def wiki_update(self, request, w_id):
+        if 'sessionid' in request.session:
+            wiki = Wiki.objects.get(wiki_id=w_id)
+            wiki.objects.select_related('revi')
+            wiki.wiki_content = request.POST['content']
+            wiki.revi.user_id = request.session['sessionid']
+            try:
+                wiki.save()
+            except:
+                return render(request, 'error/wikiexistfail.html');
+            return redirect('/wiki/detail/?wiki_id={}'.format(w_id))
+        else:
+            return redirect('/login')
 
     # ================================================================
     @request_mapping("/register", method="get")  # 회원가입
