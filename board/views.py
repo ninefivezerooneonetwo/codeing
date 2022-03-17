@@ -892,13 +892,14 @@ class MyView(View):
     def wiki_update(self, request, w_id):
         if 'sessionid' in request.session:
             wiki = Wiki.objects.get(wiki_id=w_id)
-            wiki.objects.select_related('revi')
             wiki.wiki_content = request.POST['content']
-            wiki.revi.user_id = request.session['sessionid']
-            try:
-                wiki.save()
-            except:
-                return render(request, 'error/wikiexistfail.html');
+            revi_user = Revision.objects.get(revi_id = wiki.revi_id)
+            revi_user.user_id = request.session['sessionid']
+            revi_user.revi_content = request.POST['revi_content']
+            revi_user.revi_title = request.POST['revi_title']
+            revi_user.save()
+            wiki.save()
+
             return redirect('/wiki/detail/?wiki_id={}'.format(w_id))
         else:
             return redirect('/login')
