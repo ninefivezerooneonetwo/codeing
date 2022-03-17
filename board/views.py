@@ -20,18 +20,18 @@ class MyView(View):
 
         if 'sessionid' in request.session: # 로그인 체크
 
-            try :
+            try:
                 data = json.loads(request.body)
 
                 board = Board.objects.get(board_id=data)
                 user = User.objects.get(user_id=request.session['sessionid'])
-                clip = Clipping.objects.get(user_id = user,
+                clip = Clipping.objects.get(user_id=user,
                                             board_id=board)
                 clip.delete()
                 context = {
                     'result': data,
                 }
-            except :
+            except:
                 context = {
                     'result': 'fail',
                 }
@@ -47,9 +47,8 @@ class MyView(View):
         """
 
         from .models import Clipping
-        from django.shortcuts import get_object_or_404
 
-        if 'sessionid' in request.session :
+        if 'sessionid' in request.session:
             type = request.GET['type']
             board = Board.objects.get(board_id=request.GET['board_id'])
             user = User.objects.get(user_id=request.session['sessionid'])
@@ -119,7 +118,7 @@ class MyView(View):
 
     @request_mapping("/wiki/detail/", method="get")
     def wiki_detail(self, request):
-        from django.shortcuts import redirect
+
         wiki = Wiki.objects.get(wiki_id=request.GET['wiki_id'])  # board_id로 Board정보 가져오기
         context = {'wiki': wiki}
         return render(request, 'wiki/detail_wiki.html', context)
@@ -227,8 +226,6 @@ class MyView(View):
                     search_board_list = board_list.filter(board_content__icontains=search_word)
                 elif search_type == 'writer':
                     search_board_list = board_list.filter(user__user_id__icontains=search_word)
-                print(search_board_list)
-                print(type(search_board_list))
                 context={
                     'search_boards':search_board_list,
                     'search_term':search_word
@@ -359,6 +356,8 @@ class MyView(View):
     @request_mapping("/info/info/p", method="post")  # 공지사항
     def info_post(self, request):
         wiki_title = request.POST['wiki'];
+        if wiki_title == '공지':
+            return render(request, 'error/wikipostfail.html');
         wiki = Wiki.objects.get(wiki_title = wiki_title)
         title = request.POST['title'];
         text = request.POST['content'];
@@ -396,7 +395,9 @@ class MyView(View):
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
             board.wiki_title = request.POST['wiki'];
-            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            if board.wiki_title == '공지':
+                return render(request, 'error/wikipostfail.html');
+            # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
             board.save()
 
             return redirect('/clip/detail/{}'.format(b_id))
@@ -441,8 +442,10 @@ class MyView(View):
     def free_insert(self, request):
         title = request.POST['title'];
         text = request.POST['content'];
-        objs = User.objects.all();
+
         wiki_title = request.POST['wiki'];
+        if wiki_title == '공지':
+            return render(request, 'error/wikipostfail.html');
         wiki = Wiki.objects.get(wiki_title=wiki_title)
         try:
                 data = Board(board_title=title, board='자유', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
@@ -479,7 +482,9 @@ class MyView(View):
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
             board.wiki_title = request.POST['wiki'];
-            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            if board.wiki_title == '공지':
+                return render(request, 'error/wikipostfail.html');
+            # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
             board.save()
 
             return redirect('/clip/detail/{}'.format(b_id))
@@ -525,6 +530,8 @@ class MyView(View):
         title = request.POST['title'];
         text = request.POST['content'];
         wiki_title = request.POST['wiki'];
+        if wiki_title == '공지':
+            return render(request, 'error/wikipostfail.html');
         wiki = Wiki.objects.get(wiki_title=wiki_title)
         try:
             data = Board(board_title=title, board='질문', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
@@ -560,7 +567,9 @@ class MyView(View):
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
             board.wiki_title = request.POST['wiki'];
-            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            if board.wiki_title == '공지':
+                return render(request, 'error/wikipostfail.html');
+            # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
             board.save()
 
             return redirect('/clip/detail/{}'.format(b_id))
@@ -612,6 +621,8 @@ class MyView(View):
         on_off = request.POST['board_on_off'];
         phone = request.POST['board_phone'];
         wiki_title = request.POST['wiki'];
+        if wiki_title == '공지':
+            return render(request, 'error/wikipostfail.html');
         wiki = Wiki.objects.get(wiki_title=wiki_title)
         try:
             data = Board(board_title=title, board='프로젝트', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
@@ -655,7 +666,9 @@ class MyView(View):
             board.board_recruitdate = request.POST['board_recruitdate']
             board.board_time = request.POST['board_time']
             board.wiki_title = request.POST['wiki'];
-            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
+            if board.wiki_title == '공지':
+                return render(request, 'error/wikipostfail.html');
+            # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
             board.save()
 
             return redirect('/clip/detail/{}'.format(b_id))
@@ -708,6 +721,8 @@ class MyView(View):
         on_off = request.POST['board_on_off'];
         phone = request.POST['board_phone'];
         wiki_title = request.POST['wiki'];
+        if wiki_title == '공지':
+            return render(request, 'error/wikipostfail.html');
         wiki = Wiki.objects.get(wiki_title=wiki_title)
         try:
             data = Board(board_title=title, board='스터디', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
@@ -751,6 +766,8 @@ class MyView(View):
             board.board_recruitdate = request.POST['board_recruitdate']
             board.board_time = request.POST['board_time']
             board.wiki_title = request.POST['wiki'];
+            if board.wiki_title == '공지':
+                return render(request, 'error/wikipostfail.html');
             wiki = Wiki.objects.get(wiki_title=board.wiki_title)
             board.save()
 
