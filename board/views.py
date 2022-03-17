@@ -358,7 +358,10 @@ class MyView(View):
         wiki_title = request.POST['wiki'];
         if wiki_title == '공지':
             return render(request, 'error/wikipostfail.html');
-        wiki = Wiki.objects.get(wiki_title = wiki_title)
+        try:
+            wiki = Wiki.objects.get(wiki_title = wiki_title)
+        except:
+            return render(request, 'error/wikiexistfail.html');
         title = request.POST['title'];
         text = request.POST['content'];
         try:
@@ -394,11 +397,21 @@ class MyView(View):
             board = Board.objects.get(board_id=b_id)
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
-            board.wiki_title = request.POST['wiki'];
-            if board.wiki_title == '공지':
-                return render(request, 'error/wikipostfail.html');
+
+            try:
+                if request.POST['wiki'] == '공지':
+                    return render(request, 'error/wikipostfail.html');
+                wiki_board = Wiki.objects.get(wiki_title=request.POST['wiki'])
+
+                board.wiki_id = wiki_board.wiki_id
+                board.save()
+            except:
+                return render(request, 'error/wikiexistfail.html');
+
+
+
             # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
-            board.save()
+
 
             return redirect('/clip/detail/{}'.format(b_id))
         else:
@@ -446,7 +459,11 @@ class MyView(View):
         wiki_title = request.POST['wiki'];
         if wiki_title == '공지':
             return render(request, 'error/wikipostfail.html');
-        wiki = Wiki.objects.get(wiki_title=wiki_title)
+        try:
+            wiki = Wiki.objects.get(wiki_title = wiki_title)
+        except:
+            return render(request, 'error/wikiexistfail.html');
+
         try:
                 data = Board(board_title=title, board='자유', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
                              board_content=text,
@@ -481,11 +498,18 @@ class MyView(View):
             board = Board.objects.get(board_id=b_id)
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
-            board.wiki_title = request.POST['wiki'];
-            if board.wiki_title == '공지':
-                return render(request, 'error/wikipostfail.html');
+
+            try:
+                if request.POST['wiki'] == '공지':
+                    return render(request, 'error/wikipostfail.html');
+                wiki_board = Wiki.objects.get(wiki_title=request.POST['wiki'])
+
+                board.wiki_id = wiki_board.wiki_id
+                board.save()
+            except:
+                return render(request, 'error/wikiexistfail.html');
             # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
-            board.save()
+
 
             return redirect('/clip/detail/{}'.format(b_id))
         else:
@@ -532,7 +556,10 @@ class MyView(View):
         wiki_title = request.POST['wiki'];
         if wiki_title == '공지':
             return render(request, 'error/wikipostfail.html');
-        wiki = Wiki.objects.get(wiki_title=wiki_title)
+        try:
+            wiki = Wiki.objects.get(wiki_title=wiki_title)
+        except:
+            return render(request, 'error/wikiexistfail.html');
         try:
             data = Board(board_title=title, board='질문', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
                          board_content=text,
@@ -566,12 +593,15 @@ class MyView(View):
             board = Board.objects.get(board_id=b_id)
             board.board_title = request.POST['title']
             board.board_content = request.POST['content']
-            board.wiki_title = request.POST['wiki'];
-            if board.wiki_title == '공지':
-                return render(request, 'error/wikipostfail.html');
-            # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
-            board.save()
+            try:
+                if request.POST['wiki'] == '공지':
+                    return render(request, 'error/wikipostfail.html');
+                wiki_board = Wiki.objects.get(wiki_title=request.POST['wiki'])
 
+                board.wiki_id = wiki_board.wiki_id
+                board.save()
+            except:
+                return render(request, 'error/wikiexistfail.html');
             return redirect('/clip/detail/{}'.format(b_id))
         else:
             return redirect('/login')
@@ -623,7 +653,10 @@ class MyView(View):
         wiki_title = request.POST['wiki'];
         if wiki_title == '공지':
             return render(request, 'error/wikipostfail.html');
-        wiki = Wiki.objects.get(wiki_title=wiki_title)
+        try:
+            wiki = Wiki.objects.get(wiki_title=wiki_title)
+        except:
+            return render(request, 'error/wikiexistfail.html');
         try:
             data = Board(board_title=title, board='프로젝트', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
                          board_content=content,
@@ -665,12 +698,15 @@ class MyView(View):
             board.board_on_off = request.POST['board_on_off']
             board.board_recruitdate = request.POST['board_recruitdate']
             board.board_time = request.POST['board_time']
-            board.wiki_title = request.POST['wiki'];
-            if board.wiki_title == '공지':
-                return render(request, 'error/wikipostfail.html');
-            # wiki = Wiki.objects.get(wiki_title=board.wiki_title)
-            board.save()
+            try:
+                if request.POST['wiki'] == '공지':
+                    return render(request, 'error/wikipostfail.html');
+                wiki_board = Wiki.objects.get(wiki_title=request.POST['wiki'])
 
+                board.wiki_id = wiki_board.wiki_id
+                board.save()
+            except:
+                return render(request, 'error/wikiexistfail.html');
             return redirect('/clip/detail/{}'.format(b_id))
         else:
             return redirect('/login')
@@ -723,7 +759,10 @@ class MyView(View):
         wiki_title = request.POST['wiki'];
         if wiki_title == '공지':
             return render(request, 'error/wikipostfail.html');
-        wiki = Wiki.objects.get(wiki_title=wiki_title)
+        try:
+            wiki = Wiki.objects.get(wiki_title=wiki_title)
+        except:
+            return render(request, 'error/wikiexistfail.html');
         try:
             data = Board(board_title=title, board='스터디', user_id=request.session['sessionid'], wiki_id=wiki.wiki_id,
                          board_content=content,
@@ -765,11 +804,15 @@ class MyView(View):
             board.board_on_off = request.POST['board_on_off']
             board.board_recruitdate = request.POST['board_recruitdate']
             board.board_time = request.POST['board_time']
-            board.wiki_title = request.POST['wiki'];
-            if board.wiki_title == '공지':
-                return render(request, 'error/wikipostfail.html');
-            wiki = Wiki.objects.get(wiki_title=board.wiki_title)
-            board.save()
+            try:
+                if request.POST['wiki'] == '공지':
+                    return render(request, 'error/wikipostfail.html');
+                wiki_board = Wiki.objects.get(wiki_title=request.POST['wiki'])
+
+                board.wiki_id = wiki_board.wiki_id
+                board.save()
+            except:
+                return render(request, 'error/wikiexistfail.html');
 
             return redirect('/clip/detail/{}'.format(b_id))
         else:
