@@ -376,9 +376,14 @@ class MyView(View):
     def info_updateView(self, request, b_id):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
+            wiki = Wiki.objects.all()
+            objs = [];
+            for i in range(0, len(wiki)):
+                objs.append(wiki[i].wiki_title)
 
             context = {
-                'board': board
+                'board': board,
+                'objs': objs,
             }
             return render(request, 'info/update.html', context)
         else:
@@ -454,9 +459,14 @@ class MyView(View):
     def free_updateView(self, request, b_id):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
+            wiki = Wiki.objects.all()
+            objs = [];
+            for i in range(0, len(wiki)):
+                objs.append(wiki[i].wiki_title)
 
             context = {
-                'board': board
+                'board': board,
+                'objs': objs,
             }
             return render(request, 'free/update.html', context)
         else:
@@ -530,9 +540,14 @@ class MyView(View):
     def qna_updateView(self, request, b_id):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
+            wiki = Wiki.objects.all()
+            objs = [];
+            for i in range(0, len(wiki)):
+                objs.append(wiki[i].wiki_title)
 
             context = {
-                'board': board
+                'board': board,
+                'objs': objs,
             }
             return render(request, 'qna/update.html', context)
         else:
@@ -614,9 +629,14 @@ class MyView(View):
     def project_updateView(self, request, b_id):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
+            wiki = Wiki.objects.all()
+            objs = [];
+            for i in range(0, len(wiki)):
+                objs.append(wiki[i].wiki_title)
 
             context = {
-                'board': board
+                'board': board,
+                'objs': objs,
             }
             return render(request, 'project/update.html', context)
         else:
@@ -705,9 +725,14 @@ class MyView(View):
     def study_updateView(self, request, b_id):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id)
+            wiki = Wiki.objects.all()
+            objs = [];
+            for i in range(0, len(wiki)):
+                objs.append(wiki[i].wiki_title)
 
             context = {
-                'board': board
+                'board': board,
+                'objs': objs,
             }
             return render(request, 'study/update.html', context)
         else:
