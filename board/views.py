@@ -110,6 +110,7 @@ class MyView(View):
         if 'sessionid' in request.session:
             board = Board.objects.get(board_id=b_id) # board_id로 Board정보 가져오기
             comments = Comment.objects.filter(board=board.board_id)
+
             context = {'board':board, 'comments':comments, 'center': 'comment.html', 'objs' : page_obj}
 
             return render(request, 'clip/detail.html', context)
@@ -328,6 +329,8 @@ class MyView(View):
         if 'admin' != request.session['sessionid']:
             return render(request, 'notice/noadmin.html');
         if 'sessionid' in request.session:
+            comment = Comment.objects.filter(board_id=b_id)
+            comment.delete()
             board = Board.objects.get(board_id=b_id)
             board.delete()
 
@@ -426,8 +429,11 @@ class MyView(View):
     @request_mapping("/info/d/<int:b_id>/", method="get")
     def info_delete(self, request, b_id):
         if 'sessionid' in request.session:
+            comment = Comment.objects.filter(board_id=b_id)
+            comment.delete()
             board = Board.objects.get(board_id=b_id)
             board.delete()
+
 
             return redirect('/info/info')
         else:
@@ -524,6 +530,8 @@ class MyView(View):
     @request_mapping("/free/d/<int:b_id>/", method="get")
     def free_delete(self, request, b_id):
         if 'sessionid' in request.session:
+            comment = Comment.objects.filter(board_id=b_id)
+            comment.delete()
             board = Board.objects.get(board_id=b_id)
             board.delete()
 
@@ -615,6 +623,8 @@ class MyView(View):
     @request_mapping("/qna/d/<int:b_id>/", method="get")
     def qna_delete(self, request, b_id):
         if 'sessionid' in request.session:
+            comment = Comment.objects.filter(board_id=b_id)
+            comment.delete()
             board = Board.objects.get(board_id=b_id)
             board.delete()
 
@@ -720,6 +730,8 @@ class MyView(View):
     @request_mapping("/project/d/<int:b_id>/", method="get")
     def project_delete(self, request, b_id):
         if 'sessionid' in request.session:
+            comment = Comment.objects.filter(board_id=b_id)
+            comment.delete()
             board = Board.objects.get(board_id=b_id)
             board.delete()
 
@@ -827,6 +839,8 @@ class MyView(View):
     @request_mapping("/study/d/<int:b_id>/", method="get")
     def study_delete(self, request, b_id):
         if 'sessionid' in request.session:
+            comment = Comment.objects.filter(board_id=b_id)
+            comment.delete()
             board = Board.objects.get(board_id=b_id)
             board.delete()
 

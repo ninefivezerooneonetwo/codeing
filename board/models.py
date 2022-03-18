@@ -33,12 +33,13 @@ class Clipping(models.Model):
 
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, models.DO_NOTHING)
     user = models.ForeignKey('User', models.DO_NOTHING)
     comment_content = models.TextField(blank=True, null=True)
     comment_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        managed = False
         db_table = 'comment'
 
 class Revision(models.Model):
