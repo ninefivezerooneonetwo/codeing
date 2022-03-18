@@ -240,6 +240,10 @@ class MyView(View):
     @request_mapping("/wiki/search", method="get")
     def wikisearch(self, request):
         context = [];
+        if request.GET['q'] == '':
+            context = {'message': '검색어는 2글자 이상 입력해주세요.'}
+            return render(request, 'search_wiki.html', context);
+
         search_word = request.GET['q']
         wiki_list = Wiki.objects.select_related('revi');
 
